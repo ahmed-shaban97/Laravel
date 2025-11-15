@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Mail\WelcomeUserMail;
+use App\Events\UserRegistered;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
@@ -42,9 +45,10 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        event(new UserRegistered($user));
+        Mail::to($user->email)->send(new WelcomeUserMail($user));
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('posts.index', absolute: false));
     }
 }
