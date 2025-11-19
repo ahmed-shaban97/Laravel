@@ -44,11 +44,15 @@
                             </a>
 
                             <!-- Edit -->
+                            @can('update', $post)
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-primary">
                                 <i class="bi bi-pencil-square me-1"></i> Edit
                             </a>
+                            @endcan
+
 
                             <!-- Delete -->
+                            @can('delete', $post)
                             <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this post?')"
                                 style="display:inline;">
@@ -58,6 +62,7 @@
                                     <i class="bi bi-trash3-fill me-1"></i> Delete
                                 </button>
                             </form>
+                            @endcan
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center text-muted small border-top pt-3">

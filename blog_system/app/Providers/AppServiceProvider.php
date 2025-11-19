@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use App\Listeners\SendWelcomeMessage;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     {
     Paginator::useBootstrap();
     Event::listen(UserRegistered::class, [SendWelcomeMessage::class, 'handle']);
+
     }
+
+
 }

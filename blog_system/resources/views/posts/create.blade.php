@@ -12,27 +12,24 @@
             <!-- Title -->
             <div class="mb-3">
                 <label for="title" class="form-label fw-bold">Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Enter post title" required>
+                <input type="text" name="title" class="form-control" placeholder="Enter post title">
             </div>
 
             <!-- Description -->
             <div class="mb-3">
                 <label for="description" class="form-label fw-bold">Description</label>
-                <textarea name="description" rows="4" class="form-control" placeholder="Enter post description"
-                    required></textarea>
+                <textarea name="description" rows="4" class="form-control" placeholder="Enter post description"></textarea>
             </div>
 
             <!-- Post Creator -->
             <div class="mb-3">
-                <label class="form-label">Post Creator</label>
-                <select name="creator" class="form-select">
-                    <option value="" disabled selected>Select creator</option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-
-                </select>
+                <label class="form-label fw-bold">Post Creator</label>
+                <div class="p-2 bg-light border rounded">
+                    {{ Auth::user()->name }}
+                </div>
+                <input type="hidden" name="creator" value="{{ Auth::user()->id }}">
             </div>
+
 
             <!-- Submit Button -->
             <div class="text-center">

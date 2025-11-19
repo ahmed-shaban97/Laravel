@@ -10796,3 +10796,14 @@ header.masthead .post-heading .meta a {
     font-size: 2.25rem;
   }
 }
+#mainNav {
+    position: relative !important;
+    /* بدل fixed */
+    background-color: #212529 !important;
+    /* لون غامق */
+}
+
+#mainNav.is-fixed {
+    position: relative !important;
+    /* يمنع تغير الوضعية */
+}
